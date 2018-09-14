@@ -41,10 +41,10 @@ int main(int argc, char *argv[])
   };
 
   using taskptr = Poco::Util::TimerTask::Ptr;  
-  Poco::Timestamp time;
-  
+
   for (auto& schedule: tasklist) {
     taskptr ptask = new Poco::Util::TimerTaskAdapter<MyTimerTask>(schedule.second, &MyTimerTask::onTimer);
+    Poco::Timestamp time;
     auto expire_at = time + schedule.first;
     timer.schedule(ptask, expire_at);
   }
